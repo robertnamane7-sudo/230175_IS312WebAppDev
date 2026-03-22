@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Program</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+            font-size: 16px;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        .error.visible {
+            display: block;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            let programCode = document.getElementById("programCode").value.trim();
+            let programName = document.getElementById("programName").value.trim();
+            let duration = document.getElementById("duration").value.trim();
+            
+            let codeError = document.getElementById("codeError");
+            let nameError = document.getElementById("nameError");
+            let durationError = document.getElementById("durationError");
+            
+            let isValid = true;
+            
+            // Hide all errors initially
+            codeError.classList.remove("visible");
+            nameError.classList.remove("visible");
+            durationError.classList.remove("visible");
+            
+            // Validate Program Code
+            if (programCode === "") {
+                codeError.textContent = "Program Code is required!";
+                codeError.classList.add("visible");
+                isValid = false;
+            }
+            
+            // Validate Program Name
+            if (programName === "") {
+                nameError.textContent = "Program Name is required!";
+                nameError.classList.add("visible");
+                isValid = false;
+            }
+            
+            // Validate Duration
+            if (duration === "") {
+                durationError.textContent = "Duration is required!";
+                durationError.classList.add("visible");
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+    </script>
+</head>
+<body>
+    <h1>Add New Program</h1>
+    
+    <form action="add-new-program.php" method="POST" onsubmit="return validateForm()">
+        <label for="programCode">Program Code:</label>
+        <input type="text" id="programCode" name="programCode">
+        <div id="codeError" class="error"></div>
+        
+        <label for="programName">Program Name:</label>
+        <input type="text" id="programName" name="programName">
+        <div id="nameError" class="error"></div>
+        
+        <label for="duration">Duration:</label>
+        <input type="text" id="duration" name="duration" placeholder="e.g., 3 years">
+        <div id="durationError" class="error"></div>
+        
+        <input type="submit" value="Add Program">
+    </form>
+    
+    <p style="text-align: center; margin-top: 20px;">
+        <a href="index.html">Back to Home</a>
+    </p>
+</body>
+</html>
